@@ -1,6 +1,6 @@
 package com.example.api_mvvm_kotlin.ui
 
-import Todo
+import Fact
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -15,8 +15,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.api_mvvm_kotlin.ui.theme.API_MVVM_kotlinTheme
-import com.example.api_mvvm_kotlin.viewmodel.TodoUIState
-import com.example.api_mvvm_kotlin.viewmodel.TodoViewModel
+import com.example.api_mvvm_kotlin.viewmodel.FactUIState
+import com.example.api_mvvm_kotlin.viewmodel.FactViewModel
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,7 +28,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    TodoApp()
+                    CatFactApp()
                 }
             }
         }
@@ -36,44 +36,44 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun TodoApp(todoViewModel: TodoViewModel = viewModel()) {
-    TodoScreen(uiState = todoViewModel.todoUIState)
+fun CatFactApp(factViewModel: FactViewModel = viewModel()) {
+    FactScreen(uiState = factViewModel.factUIState)
     Scaffold (
         topBar = { TopAppBar(
-            title = { Text("Todos")}
+            title = { Text("Cat facts")}
         )
         },
-        content = { TodoScreen(uiState = todoViewModel.todoUIState) })
+        content = { FactScreen(uiState = factViewModel.factUIState) })
     }
 
 
 @Composable
-fun TodoScreen(uiState: TodoUIState) {
+fun FactScreen(uiState: FactUIState) {
     when (uiState) {
-        is TodoUIState.Loading -> LoadingScreen()
-        is TodoUIState.Success -> TodoList(uiState.todo)
-        is TodoUIState.Error -> ErrorScreen()
+        is FactUIState.Loading -> LoadingScreen()
+        is FactUIState.Success -> FactList(uiState.fact)
+        is FactUIState.Error -> ErrorScreen()
     }
 }
 
 @Composable
 fun LoadingScreen() {
-    Text("Loading...")
+    Text("Loading cat info, might take seconds")
 }
 
 @Composable
 fun ErrorScreen() {
-    Text("Error retrieving data from API.")
+    Text("Error retrieving data from cat API :(")
 }
 
 @Composable
-fun TodoList(todos: List<Todo>) {
+fun FactList(facts: List<Fact>) {
     LazyColumn(
         Modifier.padding(8.dp)
     ) {
-        items(todos) { todo ->
+        items(facts) { fact ->
             Text(
-                text = todo.title,
+                text = fact.title,
                 modifier = Modifier.padding(top = 4.dp, bottom = 4.dp)
             )
             Divider(
