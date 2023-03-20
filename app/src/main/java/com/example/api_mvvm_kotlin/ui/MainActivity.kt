@@ -63,7 +63,7 @@ fun LoadingScreen() {
 
 @Composable
 fun ErrorScreen() {
-    Text("Error retrieving data from cat API :(")
+    Text("Error retrieving data from cat API :( kms")
 }
 
 @Composable
@@ -73,11 +73,11 @@ fun FactList(facts: List<Fact>) {
     ) {
         items(facts) { fact ->
             Text(
-                text = fact.title,
+                text = fact.text,
                 modifier = Modifier.padding(top = 4.dp, bottom = 4.dp)
             )
             Divider(
-                color = Color.LightGray, thickness = 1.dp
+                color = Color.Green, thickness = 1.dp
             )
         }
     }

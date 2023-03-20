@@ -28,7 +28,7 @@ class FactViewModel: ViewModel() {
         viewModelScope.launch {
             var factsApi: FactsApi? = null
             try {
-                factsApi = FactsApi!!.getInstance()
+                factsApi = FactsApi.getInstance()
                 factUIState = FactUIState.Success(factsApi.getFacts())
             } catch (e: Exception) {
                 Log.d("FACTVIEWMODEL", e.message.toString())
